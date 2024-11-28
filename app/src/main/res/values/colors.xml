@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="primaria">#00b894</color>
+    <color name="secundaria">#55efc4</color>
+    <color name="verde_splash_acreen">#9ec7c4</color>
+    <color name="cinza_fundo_telas">#F0F0F0</color>
+    <color name="verde_fundo_transparente">#6600b894</color>
+</resources>

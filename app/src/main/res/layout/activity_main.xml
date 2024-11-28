@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@color/cinza_fundo_telas" >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <!-- menu que vai ficar no topo da tela do app -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/menu_topo_app"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:padding="20dp"
+            android:background="@color/primaria"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:elevation="5dp" >
+
+            <ImageButton
+                android:id="@+id/btn_retornar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_retornar"
+                android:background="@android:color/transparent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <TextView
+                android:id="@+id/txt_titulo_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/btn_retornar"
+                app:layout_constraintTop_toTopOf="@id/btn_retornar"
+                app:layout_constraintBottom_toBottomOf="@id/btn_retornar"
+                android:text="Minhas contas"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginStart="10dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_adicionar_nova_conta"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/menu_topo_app"
+            android:layout_margin="20dp"
+            android:elevation="5dp"
+            android:padding="20dp"
+            android:text="@string/txt_btn_adicionar_nova_conta"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:fontFamily="@font/roboto_black_italic"
+            android:textSize="18sp"
+            android:background="@drawable/estilo_btn"
+            android:drawableEnd="@drawable/ic_adicionar" />
+
+        <!-- campo para o usuário consultar conta pelo título, tipo ou valor -->
+        <EditText
+            android:id="@+id/edt_consultar_conta"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_adicionar_nova_conta"
+            android:background="@drawable/estilo_campo"
+            android:elevation="5dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp"
+            android:padding="20dp"
+            android:hint="@string/txt_hint_buscar_conta"
+            android:textColor="@color/primaria" />
+
+        <TextView
+            android:id="@+id/txt_titulo_selecione_um_mes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/roboto_black_italic"
+            android:text="Selecione o mês das contas que você deseja consultar"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edt_consultar_conta"
+            android:textAlignment="center"
+            android:padding="20dp" />
+
+        <LinearLayout
+            android:id="@+id/container_possui_spinner_selecionar_mes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_titulo_selecione_um_mes"
+            android:background="@drawable/estilo_campo"
+            android:padding="20dp"
+            android:layout_margin="20dp"
+            android:elevation="5dp" >
+
+            <!-- Spinner para o usuário selecionar o mês que ele deseja consultar as contas -->
+            <Spinner
+                android:id="@+id/spn_mes_consultar_contas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txt_titulo_contas_mes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contas do mês de Janeiro"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/container_possui_spinner_selecionar_mes"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/roboto_black_italic"
+            android:textColor="@color/primaria" />
+
+        <!-- RecyclerView contendo as contas do mês atual -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_contas_mes_atual"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_titulo_contas_mes"
+            android:layout_marginTop="20dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

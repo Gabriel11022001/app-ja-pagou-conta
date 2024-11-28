@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity" >
+
+    <ImageView
+        android:id="@+id/img_fundo_tela_login"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/fundo_tela_login"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="@id/img_fundo_tela_login"
+        app:layout_constraintEnd_toEndOf="@id/img_fundo_tela_login"
+        app:layout_constraintTop_toTopOf="@id/img_fundo_tela_login"
+        app:layout_constraintBottom_toBottomOf="@id/img_fundo_tela_login"
+        android:background="@color/verde_fundo_transparente" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/estilo_fundo_card"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:padding="10dp"
+            android:layout_margin="20dp"
+            android:elevation="5dp" >
+
+            <TextView
+                android:id="@+id/txt_titulo_tela_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="Login"
+                android:textStyle="bold"
+                android:textSize="30sp"
+                android:textColor="@color/primaria"
+                android:fontFamily="@font/roboto_black_italic" />
+
+            <TextView
+                android:id="@+id/txt_label_email_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txt_titulo_tela_login"
+                android:text="E-mail*"
+                android:textColor="@color/primaria"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="20dp" />
+
+            <!-- campo para o usuário digitar seu e-mail -->
+            <EditText
+                android:id="@+id/edt_email_login"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_label_email_login"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/estilo_campo"
+                android:elevation="5dp"
+                android:padding="10dp"
+                android:layout_marginTop="7dp"
+                android:hint="Digite seu e-mail..."
+                android:textColor="@color/primaria"
+                android:textStyle="bold"
+                android:inputType="textEmailAddress" />
+
+            <TextView
+                android:id="@+id/txt_label_senha_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edt_email_login"
+                android:text="Senha*"
+                android:textColor="@color/primaria"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp" />
+
+            <!-- campo para o usuário digitar sua senha -->
+            <EditText
+                android:id="@+id/edt_senha_login"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_label_senha_login"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/estilo_campo"
+                android:elevation="5dp"
+                android:padding="10dp"
+                android:layout_marginTop="7dp"
+                android:hint="Digite sua senha..."
+                android:textColor="@color/primaria"
+                android:textStyle="bold"
+                android:inputType="textPassword" />
+
+            <!--  botão de entrar da tela de login -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_realizar_login"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edt_senha_login"
+                android:layout_marginTop="25dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/estilo_btn"
+                android:elevation="5dp"
+                android:text="Entrar"
+                android:padding="20dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textAllCaps="false"
+                android:textSize="20sp"
+                android:fontFamily="@font/roboto_black_italic"
+                android:visibility="visible" />
+
+            <!--
+                container que vai ficar sobre o botão de login quando
+                ele foi clicado para realizar a requisição de login
+            -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/container_botao_entrar_carregando"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/btn_realizar_login"
+                app:layout_constraintEnd_toEndOf="@id/btn_realizar_login"
+                app:layout_constraintTop_toTopOf="@id/btn_realizar_login"
+                app:layout_constraintBottom_toBottomOf="@id/btn_realizar_login"
+                android:background="@drawable/estilo_btn"
+                android:elevation="5dp"
+                android:padding="10dp"
+                android:visibility="gone" >
+
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:indeterminate="true"
+                    android:indeterminateTint="@color/white" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--
+                TextView que ao ser clicado vai redirecionar
+                o usuário para a tela para ele estar se cadastrando
+            -->
+            <TextView
+                android:id="@+id/txt_ainda_nao_estou_cadastrado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_realizar_login"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:text="@string/txt_ainda_nao_estou_cadastrado"
+                android:textAlignment="center"
+                android:layout_margin="20dp"
+                android:textColor="@color/primaria"
+                android:textStyle="bold"
+                android:fontFamily="@font/roboto_black_italic"
+                android:textSize="16sp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

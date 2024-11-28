@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Já Pagou?</string>
+    <string name="txt_hint_buscar_conta">Buscar conta...</string>
+    <string name="txt_btn_adicionar_nova_conta">Adicionar nova conta</string>
+    <string name="txt_label_email">E-mail*</string>
+    <string name="txt_hint_email">Digite o e-mail...</string>
+    <string name="txt_ainda_nao_estou_cadastrado">Ainda não está cadastrado? Clique aqui para estar se cadastrando no aplicativo</string>
+</resources>

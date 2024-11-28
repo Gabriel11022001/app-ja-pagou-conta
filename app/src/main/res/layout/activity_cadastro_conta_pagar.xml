@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CadastroContaPagarActivity"
+    android:background="@color/cinza_fundo_telas" >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <!-- menu que vai ficar no topo da tela do app -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/menu_topo_app"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:padding="20dp"
+            android:background="@color/primaria"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:elevation="5dp" >
+
+            <ImageButton
+                android:id="@+id/btn_retornar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_retornar"
+                android:background="@android:color/transparent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <TextView
+                android:id="@+id/txt_titulo_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/btn_retornar"
+                app:layout_constraintTop_toTopOf="@id/btn_retornar"
+                app:layout_constraintBottom_toBottomOf="@id/btn_retornar"
+                android:text="Adicionar nova conta"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginStart="10dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/menu_topo_app" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Título da conta*"
+                android:textColor="@color/primaria"
+                android:fontFamily="@font/roboto_black_italic"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp" />
+
+            <!-- campo para o usuário informar o título da conta -->
+            <EditText
+                android:id="@+id/edt_titulo_conta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/estilo_campo"
+                android:padding="10dp"
+                android:elevation="3dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="7dp"
+                android:hint="Digite o título da conta..."
+                android:textStyle="bold"
+                android:textColor="@color/primaria"
+                android:fontFamily="@font/roboto_black_italic"
+                android:inputType="text" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Valor*"
+                android:textColor="@color/primaria"
+                android:fontFamily="@font/roboto_black_italic"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp" />
+
+            <!-- campo para o usuário informar o valor da conta -->
+            <EditText
+                android:id="@+id/edt_valor_conta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/estilo_campo"
+                android:padding="10dp"
+                android:elevation="3dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="7dp"
+                android:hint="R$0.00"
+                android:textStyle="bold"
+                android:textColor="@color/primaria"
+                android:fontFamily="@font/roboto_black_italic"
+                android:inputType="numberDecimal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Data de pagamento*"
+                android:textColor="@color/primaria"
+                android:fontFamily="@font/roboto_black_italic"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp" />
+
+            <!-- campo para o usuário informar a data de pagamento da conta -->
+            <EditText
+                android:id="@+id/edt_data_pagamento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/estilo_campo"
+                android:padding="10dp"
+                android:elevation="3dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="7dp"
+                android:hint="Digite a data de pagamento..."
+                android:textStyle="bold"
+                android:textColor="@color/primaria"
+                android:fontFamily="@font/roboto_black_italic"
+                android:inputType="date" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Data da notificação*"
+                android:textColor="@color/primaria"
+                android:fontFamily="@font/roboto_black_italic"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp" />
+
+            <!-- campo para o usuário informar a data da notificação da conta -->
+            <EditText
+                android:id="@+id/edt_data_notificacao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/estilo_campo"
+                android:padding="10dp"
+                android:elevation="3dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="7dp"
+                android:hint="Digite a data da notificação..."
+                android:textStyle="bold"
+                android:textColor="@color/primaria"
+                android:fontFamily="@font/roboto_black_italic"
+                android:inputType="date" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tipo de conta"
+                android:textColor="@color/primaria"
+                android:fontFamily="@font/roboto_black_italic"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/estilo_campo"
+                android:padding="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="7dp"
+                android:elevation="3dp" >
+
+                <!-- Spinner para o usuário informar o tipo da conta que ele vai estar cadastrando -->
+                <Spinner
+                    android:id="@+id/spn_tipo_conta"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/estilo_campo"
+                android:padding="10dp"
+                android:elevation="3dp"
+                android:layout_margin="20dp"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="A conta está paga?"
+                    android:textStyle="bold"
+                    android:textColor="@color/primaria"
+                    android:fontFamily="@font/roboto_black_italic"
+                    android:textSize="16sp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <!-- Switch para o usuário selecionar se a conta está paga ou não -->
+                <Switch
+                    android:id="@+id/sw_conta_esta_paga"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp" />
+
+            </LinearLayout>
+
+            <!-- botão para o usuário efetivar o cadastro da conta -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_cadastrar_conta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/estilo_btn"
+                android:padding="20dp"
+                android:elevation="3dp"
+                android:text="Salvar"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textAllCaps="false"
+                android:fontFamily="@font/roboto_black_italic" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
