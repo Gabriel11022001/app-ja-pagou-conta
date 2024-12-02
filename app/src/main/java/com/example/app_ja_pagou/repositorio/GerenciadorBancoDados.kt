@@ -54,6 +54,10 @@ open class GerenciadorBancoDados(private val contexto: Context): SQLiteOpenHelpe
     private fun criarTabelaTiposConta() {
         Log.d("criar_tabela_tipos_conta", "Criando a tabela de tipos de conta...")
 
+        this.bancoDados!!.execSQL("CREATE TABLE IF NOT EXISTS tb_tipos_conta(" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "nome TEXT NOT NULL);")
+
         Log.d("criar_tabela_tipos_conta", "Tabela de tipos de conta criada com sucesso...")
 
         this.registrarTiposContaPadrao()
@@ -83,6 +87,14 @@ open class GerenciadorBancoDados(private val contexto: Context): SQLiteOpenHelpe
     }
 
     private fun registrarTiposContaPadrao() {
+
+        for (contador in 0 until 10) {
+            val nomeTipoConta: String = "Tipo de conta ${ contador }"
+            val contentValuesTipoContaTeste = ContentValues()
+            contentValuesTipoContaTeste.put("nome", nomeTipoConta)
+
+            this.bancoDados!!.insertOrThrow(Constantes.NOME_TB_TIPOS_CONTA, null, contentValuesTipoContaTeste)
+        }
 
     }
 
