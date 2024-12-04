@@ -2,6 +2,7 @@ package com.example.app_ja_pagou
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.view.View.OnClickListener
@@ -9,11 +10,15 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ProgressBar
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.app_ja_pagou.adapter.ContaPagarAdapter
+import com.example.app_ja_pagou.model.ContaPagar
 import com.example.app_ja_pagou.repositorio.ContaRepositorio
 import java.time.LocalDate
 import java.util.Date
@@ -26,7 +31,10 @@ class MainActivity : AppCompatActivity(), OnClickListener {
     private lateinit var edtFiltrarContas: EditText
     private lateinit var spnMesAtualFiltro: Spinner
     private lateinit var txtTituloMesSelecionado: TextView
+    private lateinit var txtNaoExistemContasMesAtual: TextView
+    private lateinit var progressBarConsultandoContasMesAtual: ProgressBar
     private lateinit var contaPagarRepositorio: ContaRepositorio
+    private lateinit var contaPagarAdapter: ContaPagarAdapter
     private val meses: List<String> = listOf(
         "Janeiro",
         "Fevereiro",
@@ -50,6 +58,23 @@ class MainActivity : AppCompatActivity(), OnClickListener {
         this.mapearEventos()
 
         this.contaPagarRepositorio = ContaRepositorio(this)
+
+        val onDeletarConta: (String) -> Unit = { tituloConta ->
+
+        }
+
+        val onMarcarContaComoPaga: (String) -> Unit = { tituloConta ->
+
+        }
+
+        this.contaPagarAdapter = ContaPagarAdapter(
+            this,
+            onDeletarConta,
+            onMarcarContaComoPaga
+        )
+
+        this.recyclerContasMesAtual.layoutManager = LinearLayoutManager(this)
+        this.recyclerContasMesAtual.adapter = this.contaPagarAdapter
     }
 
     override fun onResume() {
@@ -109,9 +134,35 @@ class MainActivity : AppCompatActivity(), OnClickListener {
     private fun filtrarContasMesSelecionado(mesSelecionado: String) {
 
         try {
-            Log.d("filtrar_mes", mesSelecionado)
-        } catch (e: Exception) {
+            this.txtNaoExistemContasMesAtual.visibility = View.GONE
+            this.progressBarConsultandoContasMesAtual.visibility = View.VISIBLE
+            this.recyclerContasMesAtual.visibility = View.GONE
 
+            Handler().postDelayed(Runnable {
+                this.progressBarConsultandoContasMesAtual.visibility = View.GONE
+
+                val contasPagarMesAtual = this.contaPagarRepositorio.buscarContasMes(mesSelecionado)
+
+                if (contasPagarMesAtual.size > 0) {
+                    this.recyclerContasMesAtual.visibility = View.VISIBLE
+
+                    val contasPagarArrayList: ArrayList<ContaPagar> = arrayListOf()
+
+                    contasPagarMesAtual.forEach { contaPagarMesAtual ->
+                        contasPagarArrayList.add(contaPagarMesAtual)
+                    }
+
+                    this.contaPagarAdapter.setContasPagar(contasPagarArrayList)
+                } else {
+                    // apresentar mensagem de que não existem contas para pagar no mês atual
+                    this.txtNaoExistemContasMesAtual.visibility = View.VISIBLE
+                }
+
+            }, 3000)
+
+        } catch (e: Exception) {
+            // apresentar alerta de erro
+            Log.e("erro_filtrar_contas_mes", e.message.toString())
         }
 
     }
@@ -154,6 +205,8 @@ class MainActivity : AppCompatActivity(), OnClickListener {
         this.edtFiltrarContas = findViewById(R.id.edt_consultar_conta)
         this.spnMesAtualFiltro = findViewById(R.id.spn_mes_consultar_contas)
         this.txtTituloMesSelecionado = findViewById(R.id.txt_titulo_contas_mes)
+        this.txtNaoExistemContasMesAtual = findViewById(R.id.txt_nao_existem_contas_mes_atual)
+        this.progressBarConsultandoContasMesAtual = findViewById(R.id.progress_bar_carregar_contas_mes_atual)
     }
 
     private fun mapearEventos() {

@@ -41,7 +41,7 @@ class ContaRepositorio(contexto: Context): Repositorio(contexto) {
 
     fun buscarContasMes(mes: String): List<ContaPagar> {
         val contasMes: ArrayList<ContaPagar> = arrayListOf()
-        val query: String = "SELECT tcp.id, tcp.titulo_conta, tcp.valor, tcp.mes_pagamento, tcp.data_notificar, tcp.data_pagamento, tcp.status, tcp.usuario_id, ttc.id AS tipo_conta_id" +
+        val query: String = "SELECT tcp.id, tcp.titulo_conta, tcp.valor, tcp.mes_pagamento, tcp.data_notificar, tcp.data_pagamento, tcp.status, ttc.id AS tipo_conta_id" +
                 ", ttc.nome AS tipo_conta_nome FROM ${ Constantes.NOME_TB_CONTAS } AS tcp, ${ Constantes.NOME_TB_TIPOS_CONTA} AS ttc WHERE mes_pagamento = ? " +
                 "AND tcp.tipo_conta_id = ttc.id;"
         val cursor: Cursor = super.bancoDados.rawQuery(query, arrayOf(mes))
@@ -63,7 +63,7 @@ class ContaRepositorio(contexto: Context): Repositorio(contexto) {
                         cursor.getString(cursor.getColumnIndex("data_pagamento"))
                     ),
                     status = cursor.getString(cursor.getColumnIndex("status")),
-                    usuarioId = cursor.getInt(cursor.getColumnIndex("usuario_id")),
+                    // usuarioId = cursor.getInt(cursor.getColumnIndex("usuario_id")),
                     tipoConta = TipoConta(
                         id = cursor.getInt(cursor.getColumnIndex("tipo_conta_id")),
                         nome = cursor.getString(cursor.getColumnIndex("tipo_conta_nome"))

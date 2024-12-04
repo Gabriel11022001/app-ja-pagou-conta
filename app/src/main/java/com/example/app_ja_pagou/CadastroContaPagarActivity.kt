@@ -108,7 +108,7 @@ class CadastroContaPagarActivity : AppCompatActivity() {
     }
 
     private fun retornar() {
-
+        finish()
     }
 
     override fun onBackPressed() {

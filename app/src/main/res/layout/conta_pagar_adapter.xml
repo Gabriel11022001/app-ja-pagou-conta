@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/estilo_fundo_card"
+    android:padding="20dp"
+    android:layout_margin="10dp"
+    android:elevation="3dp">
+
+    <!-- título da conta -->
+    <TextView
+        android:id="@+id/txt_titulo_conta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Título da conta"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:fontFamily="@font/roboto_black_italic"
+        android:textSize="16sp"
+        android:textAllCaps="true" />
+
+    <!-- valor da conta -->
+    <TextView
+        android:id="@+id/txt_valor_conta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/txt_titulo_conta"
+        app:layout_constraintTop_toBottomOf="@id/txt_titulo_conta"
+        android:text="R$200.00"
+        android:textStyle="bold"
+        android:fontFamily="@font/roboto_black_italic"
+        android:layout_marginTop="10dp" />
+
+    <!-- data de pagamento da conta -->
+    <TextView
+        android:id="@+id/txt_data_pagamento_conta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/txt_valor_conta"
+        app:layout_constraintTop_toBottomOf="@id/txt_valor_conta"
+        android:text="Data de pagamento: 11/02/2025" />
+
+    <!-- data de notificação da conta -->
+    <TextView
+        android:id="@+id/txt_data_notificacao_conta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/txt_data_pagamento_conta"
+        app:layout_constraintTop_toBottomOf="@id/txt_data_pagamento_conta"
+        android:text="Data de notificação: 10/02/2025" />
+
+    <!-- icone contendo o status da conta(pago, aguardando pagamento ou atrasado) -->
+    <ImageView
+        android:id="@+id/img_status_conta"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintStart_toStartOf="@id/txt_data_notificacao_conta"
+        app:layout_constraintTop_toBottomOf="@id/txt_data_notificacao_conta"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_conta_atrasada" />
+
+    <!-- status da conta -->
+    <TextView
+        android:id="@+id/txt_status_conta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/img_status_conta"
+        app:layout_constraintTop_toTopOf="@id/img_status_conta"
+        app:layout_constraintBottom_toBottomOf="@id/img_status_conta"
+        android:text="Aguardando pagamento"
+        android:layout_marginStart="10dp"
+        android:textStyle="bold"
+        android:fontFamily="@font/roboto_black_italic" />
+
+    <!-- botão para realizar a deleção da conta -->
+    <ImageButton
+        android:id="@+id/btn_deletar_conta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/ic_deletar_conta"
+        android:background="@android:color/transparent" />
+
+    <!-- botão para marcar a conta como paga -->
+    <ImageButton
+        android:id="@+id/btn_marcar_conta_como_paga"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@id/btn_deletar_conta"
+        app:layout_constraintTop_toTopOf="@id/btn_deletar_conta"
+        app:layout_constraintBottom_toBottomOf="@id/btn_deletar_conta"
+        android:src="@drawable/ic_marcar_conta_paga"
+        android:background="@android:color/transparent"
+        android:layout_marginEnd="10dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
