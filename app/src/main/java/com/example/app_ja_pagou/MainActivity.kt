@@ -1,5 +1,7 @@
 package com.example.app_ja_pagou
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -21,7 +23,6 @@ import com.example.app_ja_pagou.adapter.ContaPagarAdapter
 import com.example.app_ja_pagou.model.ContaPagar
 import com.example.app_ja_pagou.repositorio.ContaRepositorio
 import java.time.LocalDate
-import java.util.Date
 
 class MainActivity : AppCompatActivity(), OnClickListener {
 
@@ -219,7 +220,24 @@ class MainActivity : AppCompatActivity(), OnClickListener {
     }
 
     private fun retornar() {
+        val builderAlertDialogSair: AlertDialog.Builder = AlertDialog.Builder(this)
+        builderAlertDialogSair.setTitle("Sair")
+        builderAlertDialogSair.setMessage("Deseja sair do aplicativo?")
 
+        // confirmar sair do app
+        builderAlertDialogSair.setPositiveButton("Sim", { dialog, which ->
+            dialog.dismiss()
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        })
+
+        builderAlertDialogSair.setNegativeButton("Não, permanecer", { dialog, which ->
+            dialog.dismiss()
+        })
+
+        // apresentar o dialog
+        builderAlertDialogSair.create()
+            .show()
     }
 
     override fun onBackPressed() {
