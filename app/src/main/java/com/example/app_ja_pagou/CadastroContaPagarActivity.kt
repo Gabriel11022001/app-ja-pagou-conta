@@ -14,7 +14,9 @@ import com.example.app_ja_pagou.model.ContaPagar
 import com.example.app_ja_pagou.model.TipoConta
 import com.example.app_ja_pagou.repositorio.ContaRepositorio
 import com.example.app_ja_pagou.repositorio.TipoContaRepositorio
+import com.example.app_ja_pagou.utils.FormatarData
 import com.google.android.material.snackbar.Snackbar
+import java.util.Date
 
 class CadastroContaPagarActivity : AppCompatActivity() {
 
@@ -169,6 +171,37 @@ class CadastroContaPagarActivity : AppCompatActivity() {
         return 0
     }
 
+    private fun limparCampos() {
+        this.edtTituloConta.setText("")
+        this.edtValorConta.setText("")
+        this.edtDataPagamentoConta.setText("")
+        this.edtDataNotificacaoConta.setText("")
+        this.spnTipoConta.setSelection(0)
+        this.swContaJaEstaPaga.isSelected = false
+    }
+
+    private fun obterMesPeloNumero(numeroMes: Int): String {
+        var mes: String = ""
+
+        when (numeroMes) {
+            1 -> mes = "Janeiro"
+            2 -> mes = "Fevereiro"
+            3 -> mes = "Março"
+            4 -> mes = "Abril"
+            5 -> mes = "Maio"
+            6 -> mes = "Junho"
+            7 -> mes = "Julho"
+            8 -> mes = "Agosto"
+            9 -> mes = "Setembro"
+            10 -> mes = "Outubro"
+            11 -> mes = "Novembro"
+            12 -> mes = "Dezembro"
+            else -> mes = ""
+        }
+
+        return  mes
+    }
+
     private fun salvarConta() {
 
         try {
@@ -183,7 +216,27 @@ class CadastroContaPagarActivity : AppCompatActivity() {
                 contaPagarCadastrar.valor = this.edtValorConta.text.toString().toDouble()
                 contaPagarCadastrar.tipoConta = TipoConta(id = idTipoConta)
                 contaPagarCadastrar.status = if (this.swContaJaEstaPaga.isActivated) "Paga" else "Aguardando pagamento"
+                val dataPagamento: Date = FormatarData.obterObjetoDateAPartirDeDataInformada(
+                    "dd/MM/yyyy",
+                    this.edtDataPagamentoConta.text.toString()
+                )
+                val dataNotificacao: Date = FormatarData.obterObjetoDateAPartirDeDataInformada(
+                    "dd/MM/yyyy",
+                    this.edtDataNotificacaoConta.text.toString()
+                )
 
+                contaPagarCadastrar.dataPagamento = dataPagamento
+                contaPagarCadastrar.dataNotificacao = dataNotificacao
+                contaPagarCadastrar.mesPagamentoConta = this.obterMesPeloNumero(
+                    dataPagamento.month + 1
+                )
+
+                // persistir conta na base de dados
+                this.contaRepositorio.salvarConta(contaPagarCadastrar)
+                // apresentar notificação de que a conta foi cadastrada
+                this.apresentarAlerta(false, "Conta cadastrada com sucesso.")
+                // limpar campos
+                this.limparCampos()
             }
 
         } catch (e: Exception) {

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/txt_atencao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="20sp"
+        android:textColor="@android:color/holo_red_dark"
+        android:text="Atenção!"
+        android:textStyle="bold"
+        android:fontFamily="@font/roboto_black_italic" />
+
+    <TextView
+        android:id="@+id/txt_mensagem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus PageMaker."
+        android:textStyle="bold"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_atencao"
+        android:layout_marginTop="10dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_confirmar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_mensagem"
+        android:layout_marginTop="20dp"
+        android:text="Sim, confirmo"
+        android:background="@drawable/estilo_btn"
+        android:textColor="@color/white"
+        android:textAllCaps="true"
+        android:fontFamily="@font/roboto_black_italic"
+        android:textStyle="bold"
+        android:elevation="3dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_nao_confirmar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/btn_confirmar"
+        app:layout_constraintEnd_toEndOf="@id/btn_confirmar"
+        app:layout_constraintTop_toBottomOf="@id/btn_confirmar"
+        android:layout_marginTop="10dp"
+        android:text="Não"
+        android:background="@drawable/estilo_btn"
+        android:textColor="@color/white"
+        android:textAllCaps="true"
+        android:fontFamily="@font/roboto_black_italic"
+        android:textStyle="bold"
+        android:elevation="3dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

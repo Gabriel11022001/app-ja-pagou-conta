@@ -27,7 +27,7 @@ class ContaRepositorio(contexto: Context): Repositorio(contexto) {
         contentValuesCadastrarConta.put("data_pagamento", FormatarData.obterDataFormatada("dd/MM/yyyy", contaCadastrar.dataPagamento!!))
         contentValuesCadastrarConta.put("data_notificar", FormatarData.obterDataFormatada("dd/MM/yyyy", contaCadastrar.dataNotificacao!!))
         contentValuesCadastrarConta.put("status", contaCadastrar.status)
-        contentValuesCadastrarConta.put("usuario_id", contaCadastrar.usuarioId)
+        // contentValuesCadastrarConta.put("usuario_id", contaCadastrar.usuarioId)
         contentValuesCadastrarConta.put("tipo_conta_id", contaCadastrar.tipoConta!!.id)
         contentValuesCadastrarConta.put("mes_pagamento", contaCadastrar.mesPagamentoConta)
 
@@ -86,6 +86,27 @@ class ContaRepositorio(contexto: Context): Repositorio(contexto) {
     }
 
     fun deletarConta(idConta: Int) {
+        super.bancoDados.delete(Constantes.NOME_TB_CONTAS, "id = ?", arrayOf( idConta.toString() ))
+    }
+
+    fun buscarIdContaPeloTitulo(tituloConta: String): Int {
+        val query: String = "SELECT id FROM ${ Constantes.NOME_TB_CONTAS } WHERE titulo_conta = ?"
+        val cursor: Cursor = super.bancoDados.rawQuery(query, arrayOf( tituloConta ))
+
+        if (cursor != null) {
+
+            if (cursor.moveToFirst()) {
+
+                return cursor.getInt(cursor.getColumnIndex("id"))
+            }
+
+            cursor.close()
+
+            return 0
+        } else {
+
+            return 0;
+        }
 
     }
 

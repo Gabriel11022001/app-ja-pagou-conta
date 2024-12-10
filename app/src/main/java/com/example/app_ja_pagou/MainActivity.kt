@@ -20,12 +20,16 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.app_ja_pagou.adapter.ContaPagarAdapter
+import com.example.app_ja_pagou.dialog.DialogConfirmar
 import com.example.app_ja_pagou.model.ContaPagar
 import com.example.app_ja_pagou.repositorio.ContaRepositorio
+import com.example.app_ja_pagou.utils.ObterMesAtual
+import com.google.android.material.snackbar.Snackbar
 import java.time.LocalDate
 
 class MainActivity : AppCompatActivity(), OnClickListener {
 
+    private lateinit var dialogConfirmarDelecao: DialogConfirmar
     private lateinit var btnRetornar: ImageButton
     private lateinit var btnAdicionarNovaConta: AppCompatButton
     private lateinit var recyclerContasMesAtual: RecyclerView
@@ -60,10 +64,12 @@ class MainActivity : AppCompatActivity(), OnClickListener {
 
         this.contaPagarRepositorio = ContaRepositorio(this)
 
+        // callback do evento de deleção de conta
         val onDeletarConta: (String) -> Unit = { tituloConta ->
-
+            this.deletarConta(tituloConta)
         }
 
+        // callback do evento de marcar a conta como paga
         val onMarcarContaComoPaga: (String) -> Unit = { tituloConta ->
 
         }
@@ -76,6 +82,11 @@ class MainActivity : AppCompatActivity(), OnClickListener {
 
         this.recyclerContasMesAtual.layoutManager = LinearLayoutManager(this)
         this.recyclerContasMesAtual.adapter = this.contaPagarAdapter
+
+        this.dialogConfirmarDelecao = DialogConfirmar(this, "Deseja efetivar a deleção?") { idContaDeletar ->
+            // evento de deleção da conta
+            this.efetivarDelecaoConta(idContaDeletar = idContaDeletar)
+        }
     }
 
     override fun onResume() {
@@ -258,6 +269,52 @@ class MainActivity : AppCompatActivity(), OnClickListener {
             return
         }
 
+    }
+
+    private fun efetivarDelecaoConta(idContaDeletar: Int) {
+        Log.d("id_conta_deletar", idContaDeletar.toString())
+
+        try {
+            this.contaPagarRepositorio.deletarConta(idConta = idContaDeletar)
+
+            this.dialogConfirmarDelecao.esconder()
+            this.apresentarNotificacao(true, "Conta deletada com sucesso.")
+            this.recarregarListagemContas()
+        } catch (e: Exception) {
+            Log.e("erro_deletar_conta", e.message.toString())
+
+            this.apresentarNotificacao(false, "Erro ao tentar-se deletar a conta.")
+            this.dialogConfirmarDelecao.esconder()
+        }
+
+    }
+
+    private fun recarregarListagemContas() {
+        // obter o mês atual
+        val mesAtual = ObterMesAtual.getMesAtual()
+
+        // listar as contas novamente
+        this.filtrarContasMesSelecionado(mesSelecionado = mesAtual)
+    }
+
+    private fun deletarConta(tituloConta: String) {
+        Log.d("conta_deletar", "Título da conta que será deletada: ${ tituloConta }")
+        val idContaDeletar: Int = this.contaPagarRepositorio.buscarIdContaPeloTitulo(tituloConta)
+        this.dialogConfirmarDelecao.idEntidadeRealizarOperacaoConfirmar = idContaDeletar
+
+        this.dialogConfirmarDelecao.apresentar()
+    }
+
+    private fun apresentarNotificacao(sucesso: Boolean, mensagem: String) {
+        val snackBarAlertaOperacao: Snackbar = Snackbar.make(findViewById(android.R.id.content), mensagem, Snackbar.LENGTH_SHORT)
+
+        if (sucesso) {
+            snackBarAlertaOperacao.setBackgroundTint(getColor(android.R.color.holo_green_dark))
+        } else {
+            snackBarAlertaOperacao.setBackgroundTint(getColor(android.R.color.holo_red_dark))
+        }
+
+        snackBarAlertaOperacao.show()
     }
 
 }
